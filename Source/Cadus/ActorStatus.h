@@ -21,15 +21,19 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	int CurrentHealth;
-	bool bIsDead;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
 	void DamageActor(int amount);
 
-	int Health;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int CurrentHealth;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsDead;
+
 
 };

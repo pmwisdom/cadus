@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Components/SphereComponent.h"
 #include "ProjectileDamage.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -15,7 +16,7 @@ public:
 	// Sets default values for this component's properties
 	UProjectileDamage();
 
-	//USphereComponent* Collider;
+	USphereComponent* Collider;
 
 
 protected:
