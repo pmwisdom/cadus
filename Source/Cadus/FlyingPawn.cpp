@@ -47,16 +47,6 @@ AFlyingPawn::AFlyingPawn()
 	SpringArm->CameraLagSpeed = 15.f;
 
 
-	//Create the target Spring arm component
-	//TargetSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm1"));
-	//TargetSpringArm->SetupAttachment(RootComponent);	// Attach SpringArm to RootComponent
-	//TargetSpringArm->TargetArmLength = 300.0f; // The camera follows at this distance behind the character	
-	//TargetSpringArm->SocketOffset = FVector(0.f, 0.f, 60.f);
-	//TargetSpringArm->bEnableCameraLag = false;	// Do not allow camera to lag
-
-	//TargetMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube Mesh"));
-	//TargetMesh->SetupAttachment(TargetSpringArm, USpringArmComponent::SocketName);	// Attach the camera
-
 	// Create camera component 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera0"));
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);	// Attach the camera
@@ -115,8 +105,6 @@ void AFlyingPawn::MoveRight(float Val) {
 
 	FRotator current = PlaneMesh->RelativeRotation;
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Roll %F"), current.Roll));
-
 
 	if (bHasInput) {
 		const FVector LocalMove = FVector(0.f, Val * StrafeSpeed * GetWorld()->GetDeltaSeconds(), 0.f);
@@ -131,18 +119,13 @@ void AFlyingPawn::MoveRight(float Val) {
 			return;
 		}
 
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::White, TEXT("ROTATE MESH"));
-
-
 		RotateMesh(Val);
 	}
 	else {
 		if (current.Roll >= -1.0f && current.Roll <= 1.0f) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("DONT ROTATE"));
 			return;
 		}
 
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("ROTATE"));
 
 		float Reverse = current.Roll < 0 ? 1.0f : -1.0f;
 
@@ -153,10 +136,6 @@ void AFlyingPawn::MoveRight(float Val) {
 
 void AFlyingPawn::RotateMesh(float Val) {
 	FRotator rot = FRotator(0.f, 0.f, Val * (RotateSpeed / 1000));
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Rotate Mesh Value %F"), Val * (RotateSpeed / 1000)));
-
 
 	PlaneMesh->AddLocalRotation(rot, true);
-
-	//AddActorLocalRotation(rot, true);
 }
