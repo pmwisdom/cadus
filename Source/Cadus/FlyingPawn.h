@@ -23,12 +23,6 @@ public:
 	UPROPERTY(Category = Mesh, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class UStaticMeshComponent* RootMesh;
 
-	//UPROPERTY(Category = Mesh, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		//class UStaticMeshComponent* TargetMesh;
-
-	/** Spring arm that will offset the camera */
-	//UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	//	class USpringArmComponent* TargetSpringArm;
 
 	/** Spring arm that will offset the camera */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
@@ -60,7 +54,9 @@ private:
 	float ForwardSpeed;
 
 	/** Current forward speed */
-	float StrafeSpeed;
+	float StrafeRightSpeed;
+
+	float StrafeUpSpeed;
 
 	float YawSpeed;
 

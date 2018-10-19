@@ -52,11 +52,12 @@ AFlyingPawn::AFlyingPawn()
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);	// Attach the camera
 	Camera->bUsePawnControlRotation = false; // Don't rotate camera with controller
 
-	ForwardSpeed = 2000.0f;
-	StrafeSpeed = 1000.0f;
+	ForwardSpeed = 3000.0f;
+	StrafeRightSpeed = 2000.0f;
+	StrafeUpSpeed = 1000.0f;
 	PitchSpeed = 100.f;
 	YawSpeed = 100.f;
-	RotateSpeed = 1500.f;
+	RotateSpeed = 3000.f;
 
 }
 
@@ -92,7 +93,7 @@ void AFlyingPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 }
 
 void AFlyingPawn::MoveUp(float Val) {
-	const FVector LocalMove = FVector(0.f, 0.f, Val * StrafeSpeed * GetWorld()->GetDeltaSeconds());
+	const FVector LocalMove = FVector(0.f, 0.f, Val * StrafeUpSpeed * GetWorld()->GetDeltaSeconds());
 	const FRotator LocalRot = FRotator(Val * PitchSpeed * GetWorld()->GetDeltaSeconds(), 0.f, 0.f);
 
 	// Move plane forwards (with sweep so we stop when we collide with things)
@@ -107,7 +108,7 @@ void AFlyingPawn::MoveRight(float Val) {
 
 
 	if (bHasInput) {
-		const FVector LocalMove = FVector(0.f, Val * StrafeSpeed * GetWorld()->GetDeltaSeconds(), 0.f);
+		const FVector LocalMove = FVector(0.f, Val * StrafeRightSpeed * GetWorld()->GetDeltaSeconds(), 0.f);
 		const FRotator LocalRot = FRotator(0.f, Val * YawSpeed * GetWorld()->GetDeltaSeconds(), 0.f);
 
 
